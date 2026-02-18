@@ -1,0 +1,31 @@
+# Development config — works with the mock server
+# Start mock server first: make dev-mock-server
+# Then run keeper: make dev
+
+validator:
+  active_identity_pubkey: ActiveIdentityPubkey999999999999999999999
+
+cluster:
+  name: testnet
+  rpc_url: http://127.0.0.1:8899
+
+snapshots:
+  directory: "/tmp/solana-validator-snapshot-keeper-dev"
+  discovery:
+    candidates:
+      min_suitable_full: 3
+      min_suitable_incremental: 5
+      sort_order: latency
+    probe:
+      concurrency: 100
+      max_latency: 30s
+  download:
+    min_speed: 300mb
+    min_speed_check_delay: 2s
+    timeout: 5m
+    connections: 4
+  age:
+    remote:
+      max_slots: 5000
+    local:
+      max_incremental_slots: 1300

@@ -1,0 +1,25 @@
+# Mock server configuration
+# Simulates a Solana validator RPC and snapshot-serving nodes
+
+rpc:
+  listen_addr: ":8899"
+  identity: "PassiveIdentityPubkey111111111111111111111"
+  slot: 135501500
+  nodes:
+    - pubkey: "NodeA11111111111111111111111111111111111111"
+      gossip: "127.0.0.1:8001"
+      rpc: "http://127.0.0.1:8900"
+      version: "2.2.4"
+    - pubkey: "NodeB22222222222222222222222222222222222222"
+      gossip: "127.0.0.1:8002"
+      rpc: "http://127.0.0.1:8900"
+      version: "2.2.4"
+
+snapshot:
+  listen_addr: ":8900"
+  full_slot: 135501000
+  full_hash: "AbCdEfGhIjKlMnOp"
+  full_size_mb: 10             # 10MB for local testing (real snapshots are 60-80GB)
+  incremental_slot: 135501400
+  incremental_hash: "QrStUvWxYz123456"
+  incremental_size_mb: 2       # 2MB for local testing

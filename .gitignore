@@ -1,0 +1,30 @@
+# Scratchpad (planning docs, conversation logs)
+scratchpad/
+.claude/
+
+# Binaries
+/solana-validator-snapshot-keeper
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Build output
+dist/
+bin/
+
+# Test
+*.test
+*.out
+coverage.txt
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,46 @@
+log:
+  level: info
+  format: text
+
+validator:
+  rpc_url: "http://127.0.0.1:8899"
+  active_identity_pubkey: ""
+
+cluster:
+  name: "mainnet-beta"
+  # rpc_url: ""  # auto-derived from cluster name if empty
+
+snapshots:
+  directory: "/mnt/accounts/snapshots"
+  discovery:
+    candidates:
+      min_suitable_full: 3
+      min_suitable_incremental: 5
+      sort_order: "latency"
+    probe:
+      concurrency: 500
+      max_latency: 100ms
+  download:
+    min_speed: 60mb
+    min_speed_check_delay: 7s
+    timeout: 30m
+    connections: 8
+  age:
+    remote:
+      max_slots: 1300
+    local:
+      max_incremental_slots: 1300
+
+# hooks:
+#   on_success:
+#     - name: notify-slack
+#       cmd: /usr/local/bin/slack-notify.sh
+#       args: ["success", "Downloaded snapshot slot {{ .SnapshotSlot }} from {{ .SourceNode }}"]
+#       allow_failure: true
+#       stream_output: false
+#   on_failure:
+#     - name: notify-slack
+#       cmd: /usr/local/bin/slack-notify.sh
+#       args: ["failure", "Snapshot download failed: {{ .Error }}"]
+#       allow_failure: true
+#       stream_output: false

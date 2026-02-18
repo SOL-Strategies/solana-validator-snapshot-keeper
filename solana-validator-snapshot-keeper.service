@@ -1,0 +1,36 @@
+[Unit]
+Description=Solana Validator Snapshot Keeper
+Documentation=https://github.com/SOL-Strategies/solana-validator-snapshot-keeper
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=solana
+Group=solana
+ExecStart=/home/solana/solana-validator-snapshot-keeper/bin/solana-validator-snapshot-keeper run \
+    --config /home/solana/solana-validator-snapshot-keeper/config.testnet.yml \
+    --on-interval 2m
+Restart=always
+RestartSec=30
+
+# Resource controls — low priority so we never impact the validator
+Nice=19
+IOSchedulingClass=idle
+IOSchedulingPriority=7
+
+# Security hardening
+# ProtectHome=read-only: binary and config live under /home/solana; true would hide /home → 203/EXEC
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/mnt/accounts/snapshots
+PrivateTmp=true
+
+# Logging goes to journald (no log files in snapshot dir)
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=solana-validator-snapshot-keeper
+
+[Install]
+WantedBy=multi-user.target

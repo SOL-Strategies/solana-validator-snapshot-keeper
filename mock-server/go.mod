@@ -1,0 +1,5 @@
+module github.com/sol-strategies/solana-validator-snapshot-keeper/mock-server
+
+go 1.24
+
+require gopkg.in/yaml.v3 v3.0.1
